@@ -1,14 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Logged In</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-button (click)="getUserInfo()">Get User Details</ion-button>
+  <ion-button (click)="signOut()">Sign Out</ion-button>
+
+  <ion-card *ngIf="action">
+    <ion-card-header>
+      Action Data
+    </ion-card-header>
+    <ion-card-content>
+      {{action | json}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="userInfo">
+    <ion-card-header>
+      User Info
+    </ion-card-header>
+    <ion-card-content>
+      {{userInfo | json}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

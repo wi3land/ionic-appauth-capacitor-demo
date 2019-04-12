@@ -1,8 +1,10 @@
+import { AuthService } from './core/auth.service';
 import { Component } from '@angular/core';
+import { Plugins } from '@capacitor/core';
+
+const { SplashScreen } = Plugins;
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +13,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private auth : AuthService,
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.auth.startUpAsync();
+      SplashScreen.hide();     
     });
   }
 }

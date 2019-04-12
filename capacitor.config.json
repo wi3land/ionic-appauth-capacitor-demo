@@ -1,0 +1,6 @@
+{
+  "appId": "com.appauth.demo",
+  "appName": "com.appauth.demo",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
