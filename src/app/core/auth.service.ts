@@ -25,9 +25,9 @@ export class AuthService extends IonicAuth  {
   ){
     super(
       (platform.is('mobile') && !platform.is('mobileweb')) ? browser : undefined,
-      (platform.is('mobile') && !platform.is('mobileweb')) ? secureStorage : storage, 
+      (platform.is('mobile') && !platform.is('mobileweb')) ? secureStorage : storage,
       requestor, undefined, undefined,
-      (platform.is('mobile') && !platform.is('mobileweb')) ? new IonicAuthorizationRequestHandler(browser, secureStorage) : new IonicImplicitRequestHandler(browser, storage)
+      (platform.is('mobile') && !platform.is('mobileweb')) ? new IonicAuthorizationRequestHandler(browser, secureStorage) : new IonicAuthorizationRequestHandler(browser, storage)
     );
 
     this.addConfig();
@@ -39,29 +39,34 @@ export class AuthService extends IonicAuth  {
       if(appLaunchUrl.url != undefined)
         this.handleCallback(appLaunchUrl.url);
     }
-    
+
     super.startUpAsync();
   }
 
-  private addConfig(){
-    if(this.platform.is('mobile') && !this.platform.is('mobileweb')){
-      this.authConfig = { 
-        identity_client: 'appAuthCode', 
-        identity_server: 'https://192.68.0.1/', 
-        redirect_url: 'com.appauth.demo://callback', 
-        scopes: 'openid profile offline_access',
-        usePkce: true, 
-        end_session_redirect_url: 'com.appauth.demo://endSession', 
-      }
-    }else{
-      this.authConfig = { 
-        identity_client: 'appAuthImplicit', 
-        identity_server: 'https://192.68.0.1/', 
-        redirect_url: 'http://localhost:8100/implicit/authcallback', 
-        scopes: 'openid profile offline_access',
-        usePkce: false,
-        end_session_redirect_url: 'http://localhost:8100/implicit/endsession', 
-      }
+  private addConfig() {
+    const clientId = '0oak8qpmhim2MmwF20h7';
+    const issuer = 'https://dev-737523.oktapreview.com/oauth2/default';
+    const scopes = 'openid profile offline_access';
+
+    if (this.platform.is('mobile') && !this.platform.is('mobileweb')) {
+      this.authConfig = {
+        identity_client: clientId,
+        identity_server: issuer,
+        redirect_url: 'com.oktapreview.dev-737523:/callback',
+        scopes: scopes,
+        usePkce: true,
+        end_session_redirect_url: 'com.oktapreview.dev-737523:/logout',
+      };
+    } else {
+      this.authConfig = {
+        identity_client: clientId,
+        identity_server: issuer,
+        redirect_url: 'http://localhost:8100/implicit/callback',
+        scopes: scopes,
+        usePkce: true,
+        response_type: 'code',
+        end_session_redirect_url: 'http://localhost:8100/implicit/logout',
+      };
     }
   }
 
@@ -69,7 +74,7 @@ export class AuthService extends IonicAuth  {
     if ((callbackUrl).indexOf(this.authConfig.redirect_url) === 0){
       this.AuthorizationCallBack(callbackUrl);
     }
-    
+
     if ((callbackUrl).indexOf(this.authConfig.end_session_redirect_url) === 0){
       this.EndSessionCallBack();
     }
