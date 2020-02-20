@@ -9,23 +9,23 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
-  action : IAuthAction;
+  action: IAuthAction;
 
   constructor(
-    private auth : AuthService,
-    private navCtrl : NavController
+    private auth: AuthService,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
     this.auth.authObservable.subscribe((action) => {
-      this.action = action
-      if(action.action == AuthActions.SignInSuccess){
+      this.action = action;
+      if (action.action === AuthActions.SignInSuccess) {
         this.navCtrl.navigateRoot('home');
       }
     });
   }
 
-  signIn(){
+  signIn() {
     this.auth.signIn();
   }
 }

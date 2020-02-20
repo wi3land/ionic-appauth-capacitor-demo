@@ -1,26 +1,31 @@
+import { Platform } from '@ionic/angular';
+import { Requestor, StorageBackend } from '@openid/appauth';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Browser } from 'ionic-appauth';
+import { CapacitorBrowser } from 'ionic-appauth/lib/capacitor';
 
-import { SecureStorageService } from './cordova/secure-storage.service';
-import { CapacitorBrowserService } from './capacitor/browser.service';
-import { AuthService } from './auth.service';
-import { AuthHttpService } from './auth-http.service';
-import { AuthGuardService } from './auth-guard.service';
-import { RequestorService } from './angular/requestor.service';
-import { CapacitorStorageService } from './capacitor/storage.service';
+import { storageFactory } from './factories';
+import { NgHttpService } from './ng-http.service';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   providers: [
-    CapacitorBrowserService,
-    CapacitorStorageService,
-    RequestorService,
-    SecureStorageService,
-    AuthGuardService,
-    AuthHttpService,
-    AuthService
+    {
+      provide: StorageBackend,
+      useFactory: storageFactory,
+      deps: [Platform]
+    },
+    {
+      provide: Requestor,
+      useClass: NgHttpService
+    },
+    {
+      provide: Browser,
+      useClass: CapacitorBrowser
+    }
   ]
 })
 export class CoreModule { }
