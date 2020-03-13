@@ -41,7 +41,7 @@ export class AuthService extends IonicAuth  {
   private addConfig() {
     this.authConfig = environment.auth_config;
 
-    if (!this.platform.is('cordova')) {
+    if (!this.platform.is('capacitor')) {
       this.authConfig.redirect_url = window.location.origin + '/implicit/authcallback';
       this.authConfig.end_session_redirect_url = window.location.origin + '/implicit/endsession';
     }

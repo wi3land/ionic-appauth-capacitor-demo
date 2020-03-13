@@ -13,7 +13,7 @@ import { Platform } from '@ionic/angular';
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private auth : AuthService,
+    private auth: AuthService,
   ) {
     this.initializeApp();
   }
@@ -21,7 +21,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.auth.startUpAsync();
-      SplashScreen.hide();     
+      SplashScreen.hide();
     });
   }
 }
