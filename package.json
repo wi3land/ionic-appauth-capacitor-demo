@@ -28,7 +28,7 @@
     "@ionic-native/status-bar": "~5.21.5",
     "@ionic/angular": "~5.0.0",
     "ajv": "~6.11.0",
-    "cordova-plugin-secure-storage": "^3.0.2",
+    "cordova-plugin-secure-storage-echo": "^5.0.1",
     "core-js": "~3.6.4",
     "ionic-appauth": "~0.4.6",
     "rxjs": "~6.5.4",
