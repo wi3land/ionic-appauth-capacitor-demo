@@ -3,9 +3,8 @@ import { Requestor, StorageBackend } from '@openid/appauth';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Browser } from 'ionic-appauth';
-import { CapacitorBrowser } from 'ionic-appauth/lib/capacitor';
+import {CapacitorBrowser, CapacitorStorage} from 'ionic-appauth/lib/capacitor';
 
-import { storageFactory } from './factories';
 import { NgHttpService } from './ng-http.service';
 
 @NgModule({
@@ -15,8 +14,7 @@ import { NgHttpService } from './ng-http.service';
   providers: [
     {
       provide: StorageBackend,
-      useFactory: storageFactory,
-      deps: [Platform]
+      useClass: CapacitorStorage
     },
     {
       provide: Requestor,
