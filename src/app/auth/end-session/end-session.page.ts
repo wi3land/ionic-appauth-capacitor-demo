@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/auth.service';
 import { NavController } from '@ionic/angular';
+import { AuthService } from 'ionic-appauth';
+import { Router } from '@angular/router';
 
 @Component({
   template: '<p>Signing Out...</p>'
@@ -8,12 +9,13 @@ import { NavController } from '@ionic/angular';
 export class EndSessionPage implements OnInit {
 
   constructor(
-    private authService : AuthService,
+    private auth: AuthService,
     private navCtrl: NavController,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.authService.EndSessionCallBack();
+    this.auth.handleCallback(window.location.origin + this.router.url);
     this.navCtrl.navigateRoot('landing');
   }
 

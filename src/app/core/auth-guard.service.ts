@@ -1,8 +1,6 @@
-import { take, map, skipWhile } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from './auth.service';
-import { AuthActions } from 'ionic-appauth';
+import { AuthService } from 'ionic-appauth';
 import { NavController } from '@ionic/angular';
 
 @Injectable({
@@ -11,19 +9,15 @@ import { NavController } from '@ionic/angular';
 export class AuthGuardService implements CanActivate {
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private navCtrl: NavController,
     ) { }
 
   public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    const authenticated: boolean  = await this.authService.authObservable.pipe(skipWhile(action => action.action === AuthActions.Default),
-                                                              take(1),
-                                                              map((action) => action.tokenResponse !== undefined)).toPromise();
-
-    if (!authenticated) {
+    if (!this.auth.session.isAuthenticated) {
       this.navCtrl.navigateRoot('landing');
     }
 
-    return authenticated;
+    return this.auth.session.isAuthenticated;
   }
 }

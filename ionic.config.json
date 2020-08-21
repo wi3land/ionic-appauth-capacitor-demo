@@ -1,5 +1,7 @@
 {
-  "name": "ionic-appauth-capacitor-demo",
-  "integrations": {},
+  "name": "ionic-appauth-capacitor-demo2",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -1,4 +1,3 @@
-import { AuthService } from './core/auth.service';
 import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 
@@ -12,15 +11,13 @@ import { Platform } from '@ionic/angular';
 })
 export class AppComponent {
   constructor(
-    private platform: Platform,
-    private auth: AuthService,
+    private platform: Platform
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.auth.startUpAsync();
       SplashScreen.hide();
     });
   }

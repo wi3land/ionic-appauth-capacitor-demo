@@ -1,1 +1,1 @@
-export * from './storage.factory';
+export * from './auth.factory';
