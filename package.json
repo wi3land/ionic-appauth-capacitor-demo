@@ -1,5 +1,5 @@
 {
-  "name": "ionic-appauth-capacitor-demo2",
+  "name": "ionic-appauth-capacitor-demo",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -27,7 +27,7 @@
     "@ionic/angular": "^5.0.0",
     "@openid/appauth": "^1.2.8",
     "capacitor-secure-storage-plugin": "^0.4.0",
-    "ionic-appauth": "^0.6.7",
+    "ionic-appauth": "^0.6.8",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
