@@ -17,7 +17,7 @@ export class AuthCallbackPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.observer = this.auth.addActionListener((action) => this.postCallback(action));
-    this.auth.handleCallback(window.location.origin + this.router.url);
+    this.auth.authorizationCallback(window.location.origin + this.router.url);
   }
 
   ngOnDestroy() {

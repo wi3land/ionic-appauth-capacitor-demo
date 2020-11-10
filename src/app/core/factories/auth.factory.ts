@@ -22,7 +22,11 @@ export let authFactory = (platform: Platform, ngZone: NgZone,
         App.addListener('appUrlOpen', (data: any) => {
             if (data.url !== undefined) {
                 ngZone.run(() => {
-                    authService.handleCallback(data.url);
+                    if ((data.url).indexOf(authService.authConfig.redirect_url) === 0) {
+                        authService.authorizationCallback(data.url);
+                    }else{
+                        authService.endSessionCallback();
+                    }
                 });
             }
         });
