@@ -11,8 +11,8 @@ export const environment = {
   auth_config: {
     client_id: 'appauth',
     server_host: 'http://localhost:5200',
-    redirect_url: isIOS ? 'capacitor://localhost/auth/callback':
-      'com.appauth.demo://auth/callback',
+    redirect_url: (isIOS ? 'capacitor://localhost/': 'com.appauth.demo://') +
+      'auth/callback',
     end_session_redirect_url: 'com.appauth.demo://endsession',
     scopes: 'openid offline_access',
     pkce: true
