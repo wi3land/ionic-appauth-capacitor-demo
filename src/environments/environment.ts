@@ -2,13 +2,18 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Capacitor } from '@capacitor/core';
+
+const isIOS = Capacitor.getPlatform() === 'ios';
+const PROTOCOL = isIOS ? 'capacitor://localhost/' : 'com.appauth.demo://';
+
 export const environment = {
   production: false,
   auth_config: {
     client_id: 'appauth',
     server_host: 'http://localhost:5200',
-    redirect_url: 'com.appauth.demo://callback',
-    end_session_redirect_url: 'com.appauth.demo://endsession',
+    redirect_url: PROTOCOL + 'auth/callback',
+    end_session_redirect_url: PROTOCOL + 'endsession',
     scopes: 'openid offline_access',
     pkce: true
   }
